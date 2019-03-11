@@ -301,6 +301,17 @@
 
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
+    var _f = function (){
+        var patch = function () {
+            EventCenter.removeEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
+            GloableData.getInstance().gameMainData.stories[26]._events[334].Code = 206;
+            GloableData.getInstance().gameMainData.stories[55]._events[147].Code = 206;
+            GloableData.getInstance().gameMainData.stories[31]._events[455].Code = 206;
+            GloableData.getInstance().gameMainData.stories[62]._events[0].Argv[0] = "26";
+        }
+        EventCenter.addEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
+    }();
+
     initGame();
     // avoid autoplay restriction on browsers -- BROKEN
     // OrgWeb.prototype.getOrgPlat = function(){ return "WEB"; }
@@ -309,16 +320,7 @@
     // invalidate org menu button
     GameSystemUILayer.prototype.openOrgMenu = function () {}
     // 赤途 game patch
-    var _f = function (){
-        var _Main_prototype_enterGame_ = Main.prototype.enterGame
-        Main.prototype.enterGame = function () {
-            GloableData.getInstance().gameMainData.stories[26]._events[334].Code = 206;
-            GloableData.getInstance().gameMainData.stories[55]._events[147].Code = 206;
-            GloableData.getInstance().gameMainData.stories[31]._events[455].Code = 206;
-            GloableData.getInstance().gameMainData.stories[62]._events[0].Argv[0] = "26";
-            _Main_prototype_enterGame_();
-        }
-    }();
+    
     
     // if(platMark.toLowerCase() == "wxmini"){
     //     getWXminiGindex(function(isFrGame){
