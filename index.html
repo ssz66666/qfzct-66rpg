@@ -302,8 +302,8 @@
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
     initGame();
-    // avoid autoplay restriction on browsers
-    OrgWeb.prototype.getOrgPlat = function(){ return "WEB"; }
+    // avoid autoplay restriction on browsers -- BROKEN
+    // OrgWeb.prototype.getOrgPlat = function(){ return "WEB"; }
     // get rid of unaudited notification
     OrgWeb.prototype.getIsUnaudited = function(){ return false; }
     // invalidate org menu button
