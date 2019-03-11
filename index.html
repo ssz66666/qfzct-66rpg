@@ -281,18 +281,18 @@
         if(!isInit){
             isInit = true;
         }
-        //进入游戏就统计
-		if (platMark.indexOf("wxorg")!==-1) {
-			//WX game run time
-			commonPlayer.countServer.getWXPlayTime();
-		} else {
-			//用户信息完善了--开始统计运行时间
-			commonPlayer.countServer.gamePlayTime();
-		}
-        //统计只需要发出请求，统计全端游戏的运行量
-        commonPlayer.countServer.gameDuration();
-        //计时器开
-        commonPlayer.countServer.setRunTime();
+        // //进入游戏就统计
+		// if (platMark.indexOf("wxorg")!==-1) {
+		// 	//WX game run time
+		// 	commonPlayer.countServer.getWXPlayTime();
+		// } else {
+		// 	//用户信息完善了--开始统计运行时间
+		// 	commonPlayer.countServer.gamePlayTime();
+		// }
+        // //统计只需要发出请求，统计全端游戏的运行量
+        // commonPlayer.countServer.gameDuration();
+        // //计时器开
+        // commonPlayer.countServer.setRunTime();
         //暴露出来的click
         window["gameMain"] = new Main();
         start('4fcc10ed318a13bdb8c53a89fb5bf893','2028','isFlash','','32','','1');
@@ -308,7 +308,7 @@
     OrgWeb.prototype.getIsUnaudited = function(){ return false; }
     // invalidate org menu button
     GameSystemUILayer.prototype.openOrgMenu = function () {}
-    
+
     // if(platMark.toLowerCase() == "wxmini"){
     //     getWXminiGindex(function(isFrGame){
     //         if(isFrGame){
