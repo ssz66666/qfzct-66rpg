@@ -313,7 +313,7 @@
 
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
-    if (custom_game) {
+    if (!custom_game) {
         // 赤途 game patch
         var _f = function (){
         var patch = function () {
