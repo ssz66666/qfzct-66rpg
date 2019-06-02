@@ -312,6 +312,7 @@
 
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
+    var urlparams = new URLSearchParams(window.location.search);
     if (urlparams.has('guid') && urlparams.has('ver')) {
             custom_game = true;
     }
