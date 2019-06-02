@@ -274,6 +274,7 @@
 
     }
     var isInit = false;
+    var custom_game = false;
     function initGame() {
         if(isInit){
             return;
@@ -295,13 +296,26 @@
         // commonPlayer.countServer.setRunTime();
         //暴露出来的click
         window["gameMain"] = new Main();
-        start('4fcc10ed318a13bdb8c53a89fb5bf893','2028','isFlash','','32','','1');
+
+        // allow launching custom game
+        var urlparams = new URLSearchParams(window.location.search);
+        var game_guid = '4fcc10ed318a13bdb8c53a89fb5bf893';
+        var game_ver = '2028';
+        if (urlparams.has('guid') && urlparams.has('ver')) {
+            game_guid = urlparams.get('guid');
+            game_ver = urlparams.get('ver')
+            custom_game = true;
+        }
+
+        start(game_guid, game_ver,'isFlash','','32','','1');
 
     }
 
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
-    var _f = function (){
+    if (custom_game) {
+        // 赤途 game patch
+        var _f = function (){
         var patch = function () {
             EventCenter.removeEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
             GloableData.getInstance().gameMainData.stories[26]._events[334].Code = 206;
@@ -310,7 +324,9 @@
             GloableData.getInstance().gameMainData.stories[62]._events[0].Argv[0] = "26";
         }
         EventCenter.addEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
-    }();
+        }();
+    }
+
 
     initGame();
     // avoid autoplay restriction on browsers -- BROKEN
@@ -319,9 +335,7 @@
     OrgWeb.prototype.getIsUnaudited = function(){ return false; }
     // invalidate org menu button
     GameSystemUILayer.prototype.openOrgMenu = function () {}
-    // 赤途 game patch
-    
-    
+
     // if(platMark.toLowerCase() == "wxmini"){
     //     getWXminiGindex(function(isFrGame){
     //         if(isFrGame){
