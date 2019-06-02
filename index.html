@@ -303,8 +303,7 @@
         var game_ver = '2028';
         if (urlparams.has('guid') && urlparams.has('ver')) {
             game_guid = urlparams.get('guid');
-            game_ver = urlparams.get('ver')
-            custom_game = true;
+            game_ver = urlparams.get('ver');
         }
 
         start(game_guid, game_ver,'isFlash','','32','','1');
@@ -313,6 +312,9 @@
 
     OrgWebFree.prototype.getFreeTime = function(t){t()}
     GloableData.prototype.checkAllowSave = function(){ return !0 }
+    if (urlparams.has('guid') && urlparams.has('ver')) {
+            custom_game = true;
+    }
     if (!custom_game) {
         // 赤途 game patch
         var _f = function (){
