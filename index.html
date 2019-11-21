@@ -1,14 +1,393 @@
-<!DOCTYPE HTML>                                                                
-<html lang="en">                                                                
-    <head>                                                                      
-        <meta charset="utf-8">
-        <meta name="referrer" content="no-referrer">
-        <meta http-equiv="refresh" content="0;url=https://www.66rpg.com/game/2992" />      
-        <link rel="noreferrer" href="https://www.66rpg.com/game/2992" />                    
-    </head>                                                                                                                                                                  
-    <body>                                                                      
-        <h1>                                                                    
-            The page been moved to <a href="https://www.66rpg.com/game/2992">https://www.66rpg.com/game/2992</a>
-        </h1>                                                                  
-    </body>                                                                    
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'/>
+    <title>潜伏之赤途</title>
+    <meta name='viewport'
+          content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
+    />
+    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='full-screen' content='true'/>
+    <meta name='screen-orientation' content='portrait'/>
+    <meta name='x5-fullscreen' content='true'/>
+    <meta name='360-fullscreen' content='true'/>
+    <meta http-equiv='expires' content='0'/>
+	    <!-- 360浏览器默认开启极速模式 -->
+    <meta name=”renderer” content=”webkit”>
+    <!-- 如果安装了GCF，则使用GCF来渲染页面，如果没有安装GCF，则使用最高版本的IE内核进行渲染 -->
+    <meta http-equiv=”X-UA-Compatible” content=”IE=Edge,chrome=1″ >
+	    <!-- UC默认竖屏 ，UC强制全屏 -->
+    <meta name="browsermode" content="application"/>
+    <!-- QQ强制全屏 -->
+    <meta name="x5-page-mode" content="app"/> 
+	
+    <link type="text/css" rel="stylesheet" href="//c2.cgyouxi.com/website/hfplayer/v2/bin/css/public.css?v=20190129001"/>  
+	<!--<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/eruda.min.js?v=20190129001 "></script>-->
+    <script type="text/javascript">
+
+        var debug = false;
+        var log = console.log;
+        console.log = function(){
+            if(debug){
+                log(arguments);
+            }
+        }
+        //截取?Path
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]);
+            return null;
+        }
+        var base64Canvas;
+        function GetImageBase64(src,w,h,callback) {
+            var base64Image = document.createElement('img'); 
+            base64Image.setAttribute('crossOrigin', 'anonymous');
+            base64Image.src = src; 
+            base64Image.onload =function() { 
+                base64Image.width=w;
+                base64Image.height=h;
+                var data = getBase64(base64Image); 
+				callback(data);
+				base64Image=null;
+            } 
+        }
+        function getBase64(img) {
+            var dataURL="";
+            try {
+                if(!base64Canvas){
+                    base64Canvas = document.createElement("canvas");
+                }
+                base64Canvas.width = img.width;
+                base64Canvas.height = img.height;
+                var ctx = base64Canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                dataURL = base64Canvas.toDataURL("image/png");
+            } catch (error) {
+                console.log(error);
+            }
+            return dataURL // return dataURL.replace("data:image/png;base64,", ""); 
+        }
+        window["GetImageBase64"]= GetImageBase64;          
+		//eruda.init();
+        var pmode = "0";
+        var webUrl = '//www.66rpg.com';  //=> '//www.66rpg.com',
+        var passUrl = "//passport.66rpg.com"; //=> '//passport.66rpg.com'
+        var cgUrl = "//cg.66rpg.com";  // => 'cg.66rpg.com'
+        var bbsUrl = "//bbs.66rpg.com";  //=> 'bbs.66rpg.com'
+        var picUrl = "//pic.cgyouxi.com"; //=> '//pic.cgyouxi.com'
+        var cdnUrl = "//c2.cgyouxi.com"; //=> '//c2.cgyouxi.com'
+        var wsUrl = "ws://bd.66rpg.com:6970";  // => 'http -> ws://bd.66rpg.com:6970 'https -> wss://bd.66rpg.com:6971'暂未确定
+        var mUrl = "//m.66rpg.com";   //=> '//m.66rpg.com'
+        var cUrl = "//c.66rpg.com"; //=> '//c.66rpg.com',       //上报地址路径
+        //	hfplayer资源
+        var hfJsUrl = "//c2.cgyouxi.com/website/hfplayer/js";//=> STATIC_PATH . 'hfplayer/js',    // h5专用JS资源
+        var hfCssUrl = "//c2.cgyouxi.com/website/hfplayer/css";    // => STATIC_PATH . 'hfplayer/css',   // h5专用CSS资源
+        var hfIMGUrl = "//c2.cgyouxi.com/website/hfplayer/img";     //=> STATIC_PATH . 'hfplayer/img',   // h5专用IMG资源
+        var hfSWFUrl = "__HFSWF__";     //=> STATIC_PATH . 'hfplayer/swf',   // h5专用的SWF
+		var reportUrl = "//report.66rpg.com";
+
+        var channel_id = GetQueryString("channel_id")||"";//平台判断
+        var guid = "4fcc10ed318a13bdb8c53a89fb5bf893";
+        var ver = '2028';
+        var flower_unlock = "0";
+        var gamefv_times = "10404"; //收藏数目
+        var platMark = 'isFlash';
+        var aspect_ratio = '1'; //屏幕比例；
+        var quality = '32';
+		var isShowDebug = GetQueryString("debug");
+		
+		if(isShowDebug == true || isShowDebug == "true" || window.location.href.indexOf("debug-")>-1){
+			var src = '//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/eruda.min.js?v=20190129001 ';
+            document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+            document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
+		}
+    </script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/jquery-2.1.4.min.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/md5.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/base64-binary.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/base91.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/base64-binary.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/base64.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/CommonPlayer.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/Mark.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/GameConfig.js?v=20190129001 "></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js?v=20190129001"></script>
+
+    <!-- 登录相关js  初始化-->
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/Login.js?v=20190129001 "></script>
+ 
+        <!--如果是web引用-->
+        <!--如果是H5引用-->    <!--统计-->
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/GameShare.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/GameMenu.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/SendFlower.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/GameGlobal.js?v=20190129001 "></script>
+    <script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/common/CountServer.js?v=20190129001 "></script>
+
+</head>
+
+<body style="background-color: black;">
+<div id="EngineVer" style="background-color: black;color: white;position: absolute;z-index: 100;right: 0;bottom: 0">
+</div>
+<video id="videos" class="video-js" preload="auto" style="display: none; width: 1px;height: 1px"></video>
+<div id="videomask"
+     style="position:absolute;left:0;right:0;top:0;bottom: 0;  background-color: #000000; display:none; width: 100%;height:100%;text-align: center">
+    <div id="videoText" name="text"
+         style="position:absolute;z-index:999999;text-align:left;vertical-align:middle;display:table-cell;"></div>
+    <img id="videomaskBG" name="loadImg" style="position:absolute;left:0;right:0;top:0;bottom: 0;z-index:999;"
+         src="//c2.cgyouxi.com/website/hfplayer/img/videoLoad01.png">
+    <img id="loadingVideo" style="position:absolute;bottom:0;right:0;" src="">
+</div>
+<!--用户信息着陆点-->
+<div id="data"></div>
+    <button class="ssologin" style="display:none"></button>
+    <button class="logout" style="display:none"></button><!-- SSO模态框 BEGIN -->
+<div id="sso_login_modal" class="modal"  aria-hidden="false" style="display:none;box-shadow:0 0 30px 0 rgba(0,0,0,.2);background-color:#FFF;border-radius:6px;margin-left: -162.5px;width:325px;overflow:hidden;height:300px;top:50%;margin-top:-180px;">
+  <iframe id="js-cross-login-iframe" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" width="329" height="303" data-src="//www.66rpg.com/sso/minilogin?curUrl=http%3A%2F%2Fwww.66rpg.com%2Fh5%2F2992%3Fquality%3D32%26mark%3DisFlash%26ohp%3Dv2" src="">
+  </iframe>
+</div>
+<!-- 未登录时候才进行后台检测 -->
+
+<iframe id="sso_cross_check_login_modal" style="display:none;" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes" width="2" height="2" src="">
+</iframe>
+<!--登录相关end-->
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/OVideo.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/OAudio.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/min/laya.core.min.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/min/laya.webgl.min.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/min/laya.filter.min.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/min/laya.ui.min.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/min/laya.html.min.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/js/lib/LibClass.js?v=20190129001 "></script>
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/libs/pc-common.js?v=20190129001 "></script>
+<!--用户自定义顺序文件添加到这里-->
+<!--jsfile--Custom-->
+<!--<script type="text/javascript" src="libs/Org_start_view.js"></script>-->
+<!--jsfile--Custom-->
+
+<!--自定义的js(src文件夹下)文件自动添加到下面jsfile模块标签里面里-->
+<!--删除标签，ide不会自动添加js文件，请谨慎操作-->
+<!--启动类添加到这里-->
+<script type="text/javascript" src="//c2.cgyouxi.com/website/hfplayer/v2/bin/main.min.js?v=20190129001 "></script>
+
+<!--分享-->
+<div class="share-mask"></div>
+<div class="share-modal share-modal-sp" id="share-modal">
+    <div class="share-modal-box">
+        <div class="share-modal-colse"></div>
+        <div class="box1 clearfix">
+            <div>本次分享：</div>
+            <div id="shareCon">
+                <div>为本作品送<img class="icon" src="//c1.cgyouxi.com/website/orange/img/common/f3.png" /><span class="btnBFlower">0</span>朵花</div>
+                <div>您获得<img class="icon" src="//pic.cgyouxi.com/orange/common/list/icon_color_leaf.png" /><span class="btnBNum">0</span>积分</div>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="title">每日奖励</div>
+            <div class="tr clearfix">
+                <div class="arrow_icon">&rarr;</div>
+                <div class="sharenum">首 <i></i>次 </div>
+            </div>
+            <div class="tr clearfix">
+                <div class="arrow_icon">&rarr;</div>
+                <div class="sharenum">再 <i></i>次 </div>
+                <!--<div><img class="icon" src="//c1.cgyouxi.com/website/orange/img/common/f3.png" />鲜花<span class="btnAFlower2">0</span>朵</div>-->
+                <!--<div><img class="icon" src="//pic.cgyouxi.com/orange/common/list/icon_color_leaf.png" />积分<span class="btnANum2">0</span>分</div>-->
+            </div>
+            <div class="tr clearfix">
+                <div class="arrow_icon">&rarr;</div>
+                <div class="sharenum">第三次</div>
+                <!--<div><img class="icon" src="//c1.cgyouxi.com/website/orange/img/common/f3.png" />鲜花<span class="btnAFlower3">0</span>朵</div>-->
+                <!--<div><img class="icon" src="//pic.cgyouxi.com/orange/common/list/icon_color_leaf.png" />积分<span class="btnANum3">0</span>分</div>-->
+            </div>
+        </div>
+        <div class="box3">
+            <ul class="clearfix share-modal-itemlist">
+                <li data-share="weibo">
+                    <img src="//c1.cgyouxi.com/website/orange/img/common/share/weibo.png" />
+                    <div>微博</div>
+                </li>
+                <li data-share="qzone">
+                    <img src="//c1.cgyouxi.com/website/orange/img/common/share/qzone.png" />
+                    <div>QQ空间</div>
+                </li>
+                <li data-share="qq">
+                    <img src="//c1.cgyouxi.com/website/orange/img/common/share/QQ.png" />
+                    <div>QQ</div>
+                </li>
+                <li data-share="wechat">
+                    <img src="//c1.cgyouxi.com/website/orange/img/common/share/wechat.png" />
+                    <div>微信</div>
+                </li>
+            </ul>
+        </div>
+        <div class="box2_1 clearfix" style="font-family: '微软雅黑'">
+            <div class="box2_1_tit">额外奖励</div>
+            <div class="box2_1_r"><p>分享内容每次被用户浏览后都会获得<em>50积分</em>奖励</p></div>
+        </div>
+    </div>
+</div>
+
+<script>
+	function goWXShare(sendJson, success, fail, complete) {
+		wx.miniProgram.navigateTo ({ 
+			url:'../shareModel/shareModel?path='+encodeURIComponent(JSON.stringify(sendJson)), //path后面的值是传递的数据。 
+			success: success,  
+			fail: fail,  
+			complete:complete  
+		});
+	}
+	function goWXMainPage() {
+		wx.miniProgram.reLaunch({url: "./../index/index"});
+	}
+    window["author_uname"] ='fantasia';
+        
+    window["check_level"] = '-1'
+    function start(gid, version, m, s, q, gamebinpath,game_screen, gindex, plat) {
+//        GloableData.getInstance().serverPath = ServerPath;
+        gamebinpath = ""
+        GloableData.getInstance().serverPath = "//c2.cgyouxi.com/website/hfplayer/v2/bin/";
+        try{
+            window["gameMain"].initGameData(gid, version, m, s, q, gamebinpath, game_screen, gindex, plat);
+            GloableData.getInstance().gameInfo.gIndex = '2992'
+        }catch (e){
+            var plat = "";
+            if(GloableData.getInstance().gameInfo.isPc){
+                plat = "PC";
+            }else{
+                plat = OrgWeb.getInstance().getOrgPlat();
+            }
+            var DataTime = new Date().getTime() / 1000;
+            var uploadData = {
+                sn: '9',
+                sv: '1',
+                ei: e.stack +"---->plat:"+plat,
+                rt: '1',
+                sign: DataTime
+            };
+            AjaxManager.getInstance().sendAjaxPost("//support.66rpg.com/report/bug",uploadData,null,null);
+			GloableData.getInstance().reportorError.upError(e);
+        }
+
+    }
+    var isInit = false;
+    var custom_game = false;
+    function initGame() {
+        if(isInit){
+            return;
+        }
+        if(!isInit){
+            isInit = true;
+        }
+        // //进入游戏就统计
+		// if (platMark.indexOf("wxorg")!==-1) {
+		// 	//WX game run time
+		// 	commonPlayer.countServer.getWXPlayTime();
+		// } else {
+		// 	//用户信息完善了--开始统计运行时间
+		// 	commonPlayer.countServer.gamePlayTime();
+		// }
+        // //统计只需要发出请求，统计全端游戏的运行量
+        // commonPlayer.countServer.gameDuration();
+        // //计时器开
+        // commonPlayer.countServer.setRunTime();
+        //暴露出来的click
+        window["gameMain"] = new Main();
+
+        // allow launching custom game
+        var urlparams = new URLSearchParams(window.location.search);
+        var game_guid = '4fcc10ed318a13bdb8c53a89fb5bf893';
+        var game_ver = '2028';
+        if (urlparams.has('guid') && urlparams.has('ver')) {
+            game_guid = urlparams.get('guid');
+            game_ver = urlparams.get('ver');
+        }
+
+        start(game_guid, game_ver,'isFlash','','32','','1');
+
+    }
+
+    OrgWebFree.prototype.getFreeTime = function(t){t()}
+    GloableData.prototype.checkAllowSave = function(){ return !0 }
+    var urlparams = new URLSearchParams(window.location.search);
+    if (urlparams.has('guid') && urlparams.has('ver')) {
+            custom_game = true;
+    }
+    if (!custom_game) {
+        // 赤途 game patch
+        var _f = function (){
+        var patch = function () {
+            EventCenter.removeEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
+            GloableData.getInstance().gameMainData.stories[26]._events[334].Code = 206;
+            GloableData.getInstance().gameMainData.stories[55]._events[147].Code = 206;
+            GloableData.getInstance().gameMainData.stories[31]._events[455].Code = 206;
+            GloableData.getInstance().gameMainData.stories[62]._events[0].Argv[0] = "26";
+        }
+        EventCenter.addEventListener(GameEventConstant.INIT_DMAIN_COMPLETE, this, patch)
+        }();
+    }
+
+
+    initGame();
+    // avoid autoplay restriction on browsers -- BROKEN
+    // OrgWeb.prototype.getOrgPlat = function(){ return "WEB"; }
+    // get rid of unaudited notification
+    OrgWeb.prototype.getIsUnaudited = function(){ return false; }
+    // invalidate org menu button
+    GameSystemUILayer.prototype.openOrgMenu = function () {}
+
+    // if(platMark.toLowerCase() == "wxmini"){
+    //     getWXminiGindex(function(isFrGame){
+    //         if(isFrGame){
+    //             initGame(); 
+    //         }else{
+    //             alert("当前不是免费游戏,请下载橙光APP,浏览更多精彩游戏")
+    //         }
+    //     })
+    // }else if (platMark.indexOf("wxorg")!==-1) {
+	// 	var uid = utils.GetQueryString("xcx_uid");
+	// 	var uName = utils.GetQueryString("username");
+	// 	if (uid) {
+	// 		commonPlayer.userInfos.uid = uid;
+	// 		if (uName) {
+	// 			commonPlayer.userInfos.uname = base64.decoder(uName);
+	// 		}
+    //         commonPlayer.loginStatus = true;
+	// 	}
+	// 	commonPlayer.goWXShare = goWXShare;
+	// 	commonPlayer.goWXMainPage = goWXMainPage;
+    //     initGame();
+	// }else if(platMark.indexOf("light")!==-1){
+    //     initGame();        
+    // }else{
+	// //todo 用户需要单独抽出
+    // 	if(mark.IOS){
+    // 		initGame();
+    // 	}
+    //     if (channel_id.length>0) {
+    //         window.parent.sdkLogin.init(function (data) {
+    //             if(parseInt(data.uid)>0){
+    //                 THRPLAN = data;
+    //                 commonPlayer.userInfos = data;
+    //                 commonPlayer.channel_id = data.channel_id;
+    //                 commonPlayer.platform = data.channel_type;
+    //                 commonPlayer.loginStatus = true;
+    //                 commonPlayer.countServer.getServerTime(function(){
+    //                     initGame();
+    //                 })
+    //             }
+    //         });
+    //     }
+    // }
+    function gameMainBlur(){
+        window["gameMain"].stageBlur()
+    }
+    function gameMainFocus(){
+        window["gameMain"].stageFocus();
+    }
+</script>
+</body>
 </html>
