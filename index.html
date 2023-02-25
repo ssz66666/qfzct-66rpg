@@ -340,9 +340,9 @@
         var e = this;
         GloableData.getInstance().gameInfo.isPc && !isElectron() ? EventCenter.dispatchEvent(new GameEvent(GameEventConstant.LOAD_INIT_BIN_COMPLETE)) : ORG.loader.load(t, OHandler.create(this, function(t) {
             var encoded = t["encrypt_data"];
-            encoded = encoded.replace('!','=');
-            encoded = encoded.replace('_', '/');
-            encoded = encoded.replace('-', '+');
+            encoded = encoded.replaceAll('!','=');
+            encoded = encoded.replaceAll('_', '/');
+            encoded = encoded.replaceAll('-', '+');
             var decoded_data = JSON.parse(atob(encoded));
             e.readMapBinByArray(decoded_data)
         }), OHandler.create(this, this.mbProgress, null, !1), "json", 0, !1)
