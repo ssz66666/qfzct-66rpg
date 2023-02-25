@@ -331,7 +331,23 @@
         }();
     }
 
+    // 20230225 patch main.js to use the new API to obtain map.bin JSON
+    LoadMapBin.prototype.load = function() {
+        this.loadFile(this.urlmap.replace("api/", "api/v2/") + "&r-key=Lv4Q8lE63L5jCHixs_5k9l22zNHWingKxDV7M4dovGfMpeCeL-7dIwXjSj6D2HA1rj-6E-3YBjz4XeHCpq57ZKg42t8MWyc8IG4yLPKU6IzpVHfJJdZoUgaPM6viLfZ0YHye3Z8ObWa0rN1C6zMb5m6pohIUZTV54_uqMKwCzdrTTTCACC5nGAAkmkvBEHMW6rYS58k1w3bhUtOB8ur8-50XVMSf0R8zNJ9OZKu4yzG7WvUinCX6vk7u3P5ar7vHnCT_hk9QRH4lfeV6lHotcEOP52rejDUu8cePcYfvPhH0qojFq8fB1PHDHr94pYzWsgKFXsUgalq5npRAE-6dxg!!")
+    }
 
+    LoadMapBin.prototype.loadFile = function(t) {
+        var e = this;
+        GloableData.getInstance().gameInfo.isPc && !isElectron() ? EventCenter.dispatchEvent(new GameEvent(GameEventConstant.LOAD_INIT_BIN_COMPLETE)) : ORG.loader.load(t, OHandler.create(this, function(t) {
+            var encoded = t["encrypt_data"];
+            encoded = encoded.replace('!','=');
+            encoded = encoded.replace('_', '/');
+            encoded = encoded.replace('-', '+');
+            var decoded_data = JSON.parse(atob(encoded));
+            e.readMapBinByArray(decoded_data)
+        }), OHandler.create(this, this.mbProgress, null, !1), "json", 0, !1)
+    }
+	
     initGame();
     // avoid autoplay restriction on browsers -- BROKEN
     // OrgWeb.prototype.getOrgPlat = function(){ return "WEB"; }
