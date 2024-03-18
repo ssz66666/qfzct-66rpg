@@ -344,7 +344,8 @@
             encoded = encoded.replaceAll('_', '/');
             encoded = encoded.replaceAll('-', '+');
             var decoded_data = JSON.parse(atob(encoded));
-            e.readMapBinByArray(decoded_data)
+	    for (i of decoded_data.data) { i[0] = i[0].replaceAll('а', 'a'); i[0] = i[0].replaceAll('о', 'o'); i[0] = i[0].replaceAll('е', 'e');  }
+            e.readMapBinByArray(decoded_data);
         }), OHandler.create(this, this.mbProgress, null, !1), "json", 0, !1)
     }
 	
